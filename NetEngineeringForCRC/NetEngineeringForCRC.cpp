@@ -65,14 +65,10 @@ int main()
 
 			//显示操作
 		case 2:
-			std::cout << endl << endl
-				<< "******************** M A C 帧 开始 ******************" 
-				<< endl;
+			showEtherStart();
 			newMacPack->checkCRC();
 			newDisplayer->display();
-			std::cout 
-				<< "******************** M A C 帧 结束 ******************"
-				<< endl << endl << endl;
+			showEtherEnd();
 			break;
 
 			//设置源Mac地址	

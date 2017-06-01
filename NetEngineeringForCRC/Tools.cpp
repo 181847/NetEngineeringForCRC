@@ -297,3 +297,18 @@ void convert_string_to_charArray(string original, char * target)
 	}
 	target[checkPointer] = '\0';
 }
+
+void showEtherStart()
+{
+
+	std::cout << endl << endl
+		<< "******************** 以 太 网 帧 开始 ******************"
+		<< endl;
+}
+
+void showEtherEnd()
+{
+	std::cout
+		<< "******************** 以 太 网 帧 结束 ******************"
+		<< endl << endl << endl;
+}

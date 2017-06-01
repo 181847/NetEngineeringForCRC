@@ -31,4 +31,11 @@ void showHelp();
 //计算字符串长度
 unsigned int lengthOf(char* charArray);
 
+//将string中的字符复制到target中
 void convert_string_to_charArray(std::string original, char* target);
+
+//在控制台显示以太网帧开始的字样
+void showEtherStart();
+
+//在控制台显示以太网帧结束的字样
+void showEtherEnd();
