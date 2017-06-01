@@ -1,27 +1,21 @@
 #include "stdafx.h"
-#include "MYCRC_8.h"
+#include "MYCRC_32.h"
 
-MYCRC_8::MYCRC_8()
+
+MYCRC_32::MYCRC_32()
 {
-	for (int i = 0; i < 8; ++i) {
-		buffer[i] = false;
+	for (unsigned int i = 0; i < 32; ++i)
+	{
+		buffer[i] = 1;
 	}
 }
 
 
-MYCRC_8::~MYCRC_8()
+MYCRC_32::~MYCRC_32()
 {
 }
 
-/*
- *@param data 
- *		作为比特流的数据，
- *		长度最好为8的整数倍，
- *@param bitLength
- *		比特流的具体长度，
- *		必须大于等于8。
- */
-void MYCRC_8::checkData(bool * data, int bitLength)
+void MYCRC_32::checkData(bool * data, int bitLength)
 {
 	if (bitLength <= 0) {
 		return;
@@ -30,7 +24,7 @@ void MYCRC_8::checkData(bool * data, int bitLength)
 	unsigned int pData;
 	//ForCRC_8
 	//先提取第0位到第7位之间的八个数据
-	for (pData = 0; pData < 8; ++pData) {
+	for (pData = 0; pData < 32; ++pData) {
 		if (pData >= bitLength) {
 			buffer[pData] = false;
 		}
@@ -45,7 +39,7 @@ void MYCRC_8::checkData(bool * data, int bitLength)
 	int checkPointer = 0;
 
 	//For_CRC_8
-	for (; checkPointer < bitLength; ++checkPointer) 
+	for (; checkPointer < bitLength; ++checkPointer)
 	{
 		//如果第checkPointer位为true，
 		//表示这个位置的比特数据为1
@@ -67,36 +61,29 @@ void MYCRC_8::checkData(bool * data, int bitLength)
 	}
 }
 
-void MYCRC_8::leftMove(int checkPointer, bool * data, int bitLength)
+void MYCRC_32::leftMove(int checkPointer, bool * data, int bitLength)
 {
-	checkPointer += 8;
-	for (int i = 0; i < 7; ++i) {
+	checkPointer += 32;
+	for (int i = 0; i < 31; ++i) {
 		buffer[i] = buffer[i + 1];
 	}
 
 	if (checkPointer >= bitLength) {
-		buffer[7] = false;
+		buffer[31] = false;
 	}
 	else {
-		buffer[7] = data[checkPointer];
+		buffer[31] = data[checkPointer];
 	}
 }
 
-void MYCRC_8::compareWithCheckerBuffer()
+void MYCRC_32::compareWithCheckerBuffer()
 {
-	for (int i = 0; i < 8; ++i) {
+	for (int i = 0; i < 32; ++i) {
 		buffer[i] = buffer[i] != checkBuffer[i];
 	}
 }
 
-void MYCRC_8::showAsBit()
-{
-	for (int i = 0; i < 8; ++i) {
-		std::cout << buffer[i] ? '1' : '0';
-	}
-}
-
-const bool * MYCRC_8::getResult()
+const bool * MYCRC_32::getResult()
 {
 	return buffer;
 }
