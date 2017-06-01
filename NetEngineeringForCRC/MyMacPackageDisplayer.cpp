@@ -24,8 +24,6 @@ void MyMacPackageDisplayer::display()
 	nextLine();
 	showMacFCS();
 	nextLine();
-	/*
-	*/
 }
 
 void MyMacPackageDisplayer::setShowInHex(bool showInHex)
